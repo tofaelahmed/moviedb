@@ -1,12 +1,16 @@
 <!-- nav -->
-<nav class="navbar navbar-expand-md navbar-dark bg-dark" *ngIf="currentUser">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <a class="navbar-brand" href="#"> MovieDB </a>
 
   <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" [ngClass]="{ show: navbarOpen }">
+  <div
+    *ngIf="currentUser"
+    class="collapse navbar-collapse"
+    [ngClass]="{ show: navbarOpen }"
+  >
     <div class="navbar-nav mr-auto">
       <a class="nav-item nav-link" routerLink="/dashboard">Dashboard</a>
       <a class="nav-item nav-link" routerLink="/add-movie">Add Movie</a>
@@ -15,6 +19,7 @@
       <a *ngIf="!navbarOpen" class="nav-item nav-link">
         {{ currentUser.email }}
       </a>
+
       <a class="nav-item nav-link" (click)="logout()">
         Logout<span *ngIf="navbarOpen"> ({{ currentUser.email }}) </span></a
       >

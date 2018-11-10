@@ -20,8 +20,10 @@ export class AppComponent {
     private socketService: SocketService
   ) {
     this.authenticationService.currentUser.subscribe(currentUser => {
-      this.currentUser = currentUser;
-      this.socketService.connect();
+      if (currentUser) {
+        this.currentUser = currentUser;
+        this.socketService.connect();
+      }
     });
   }
 
