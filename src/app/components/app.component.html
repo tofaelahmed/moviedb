@@ -1,0 +1,30 @@
+<!-- nav -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" *ngIf="currentUser">
+  <a class="navbar-brand" href="#"> MovieDB </a>
+
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" [ngClass]="{ show: navbarOpen }">
+    <div class="navbar-nav mr-auto">
+      <a class="nav-item nav-link" routerLink="/dashboard">Dashboard</a>
+      <a class="nav-item nav-link" routerLink="/add-movie">Add Movie</a>
+    </div>
+    <div class="navbar-nav ml-auto">
+      <a *ngIf="!navbarOpen" class="nav-item nav-link">
+        {{ currentUser.email }}
+      </a>
+      <a class="nav-item nav-link" (click)="logout()">
+        Logout<span *ngIf="navbarOpen"> ({{ currentUser.email }}) </span></a
+      >
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <app-messages></app-messages>
+    <router-outlet></router-outlet>
+  </div>
+</div>

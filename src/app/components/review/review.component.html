@@ -1,0 +1,82 @@
+<div *ngIf="!userReview">
+  <div class="card card-outline-secondary">
+    <div class="card-header"><h3 class="mb-0">Leave a review</h3></div>
+    <div class="card-body">
+      <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="rating">Rating</label>
+          <div class="form-control">
+            <ngb-rating
+              max="5"
+              formControlName="rating"
+              [formControl]="f.rating"
+              [ngClass]="{ 'is-invalid': submitted && f.rating.errors }"
+            ></ngb-rating>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="comment">Comment</label>
+          <textarea
+            type="text"
+            rows="5"
+            formControlName="comment"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.comment.errors }"
+          ></textarea>
+          <div *ngIf="submitted && f.rating.errors" class="invalid-feedback">
+            <div *ngIf="f.rating.errors.required">Rating is required</div>
+          </div>
+          <div *ngIf="submitted && f.comment.errors" class="invalid-feedback">
+            <div *ngIf="f.comment.errors.required">Comment is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button [disabled]="loading" class="btn btn-primary">Submit</button>
+          <img
+            *ngIf="loading"
+            class="pl-3"
+            src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+          />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="userReview">
+  <div class="card card-outline-secondary">
+    <div class="card-header"><h3 class="mb-0">Your Review</h3></div>
+    <div class="card-body">
+      <span>Rating:</span>
+      <ngb-rating
+        [(rate)]="userReview.rating"
+        max="5"
+        [readonly]="true"
+      ></ngb-rating>
+      <div>Comment: {{ userReview.comment }}</div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="reviews.length">
+  <div class="card card-outline-secondary">
+    <div class="card-header"><h3 class="mb-0">User Reviews</h3></div>
+    <div class="list-group">
+      <a
+        *ngFor="let review of reviews"
+        class="list-group-item list-group-item-action flex-column align-items-start"
+      >
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-2">{{ review.email }}</h6>
+          <small> {{ review.date | date: "short" }}</small>
+        </div>
+        <ngb-rating
+          [(rate)]="review.rating"
+          max="5"
+          [readonly]="true"
+        ></ngb-rating>
+        <p class="mb-1">{{ review.comment }}</p>
+      </a>
+    </div>
+  </div>
+</div>

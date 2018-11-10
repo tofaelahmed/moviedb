@@ -1,0 +1,129 @@
+<div class="row">
+  <div class="col-lg-6 col-sm-12">
+    <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+      <div class="card card-outline-secondary">
+        <div *ngIf="!f.id.value" class="card-header">
+          <h3 class="mb-0">Add Movie</h3>
+        </div>
+        <div *ngIf="f.id.value" class="card-header">
+          <h3 class="mb-0">Edit Movie</h3>
+        </div>
+
+        <div class="card-body">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              formControlName="title"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+            />
+            <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+              <div *ngIf="f.title.errors.required">Title is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="releaseDate">Release Date</label>
+            <input
+              type="date"
+              formControlName="releaseDate"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.releaseDate.errors }"
+            />
+            <div
+              *ngIf="submitted && f.releaseDate.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.releaseDate.errors.required">
+                Release Date is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="duration">Duration in minutes</label>
+            <input
+              type="number"
+              formControlName="duration"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.duration.errors }"
+            />
+            <div
+              *ngIf="submitted && f.duration.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.duration.errors.required">Duration is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="director">Director</label>
+            <input
+              type="text"
+              formControlName="director"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.director.errors }"
+            />
+            <div
+              *ngIf="submitted && f.director.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.director.errors.required">Director is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="actors">Actors(sperate by comma)</label>
+            <input
+              type="text"
+              formControlName="actors"
+              placeholder="John Doe, Jane Doe"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.actors.errors }"
+            />
+            <div *ngIf="submitted && f.actors.errors" class="invalid-feedback">
+              <div *ngIf="f.actors.errors.required">Actors is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <button
+              *ngIf="!f.id.value"
+              [disabled]="loading"
+              class="btn btn-primary mr-2"
+            >
+              Add Movie
+            </button>
+            <button
+              *ngIf="showDelete"
+              [disabled]="loading || movieDeleted"
+              (click)="deleteMovie(f.id.value)"
+              class="btn btn-danger mr-2"
+              type="button"
+            >
+              Delete Movie
+            </button>
+            <button
+              *ngIf="f.id.value"
+              [disabled]="loading"
+              [disabled]="loading || movieDeleted"
+              class="btn btn-primary mr-2"
+            >
+              Update Movie
+            </button>
+            <img
+              *ngIf="loading"
+              class="pl-3"
+              src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+            />
+            <a routerLink="/dashboard" class="btn btn-link">Go Back</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="offset-lg-1 col-lg-5 col-sm-12">
+    <app-review
+      *ngIf="movieDataFetched && !movieDeleted"
+      [userReview]="userReview"
+      [reviews]="reviews"
+      [movieId]="movieId"
+    ></app-review>
+  </div>
+</div>
