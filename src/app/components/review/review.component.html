@@ -43,21 +43,6 @@
   </div>
 </div>
 
-<div *ngIf="userReview">
-  <div class="card card-outline-secondary">
-    <div class="card-header"><h3 class="mb-0">Your Review</h3></div>
-    <div class="card-body">
-      <span>Rating:</span>
-      <ngb-rating
-        [(rate)]="userReview.rating"
-        max="5"
-        [readonly]="true"
-      ></ngb-rating>
-      <div>Comment: {{ userReview.comment }}</div>
-    </div>
-  </div>
-</div>
-
 <div *ngIf="reviews.length">
   <div class="card card-outline-secondary">
     <div class="card-header"><h3 class="mb-0">User Reviews</h3></div>
