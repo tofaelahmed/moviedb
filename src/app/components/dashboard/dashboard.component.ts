@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
     { headerName: "Actors", field: "actors" },
     {
       headerName: "Average Rating (x/5)",
-      field: "avg_rating"
+      field: "avgRating"
     }
   ];
 
