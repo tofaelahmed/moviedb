@@ -36,11 +36,11 @@ export class DashboardComponent implements OnInit {
       field: "releaseDate",
       cellRenderer: getDateTemplae
     },
-    { headerName: "Duration", field: "duration" },
+    { headerName: "Duration (in minutes)", field: "duration" },
     { headerName: "Director", field: "director" },
     { headerName: "Actors", field: "actors" },
     {
-      headerName: "Average Rating",
+      headerName: "Average Rating (x/5)",
       field: "avg_rating"
     }
   ];
