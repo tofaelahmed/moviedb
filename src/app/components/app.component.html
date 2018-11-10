@@ -7,7 +7,7 @@
   </button>
 
   <div
-    *ngIf="currentUser"
+    *ngIf="(currentUser$ | async) as currentUser"
     class="collapse navbar-collapse"
     [ngClass]="{ show: navbarOpen }"
   >

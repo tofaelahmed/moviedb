@@ -4,6 +4,8 @@ import { Router } from "@angular/router";
 import { AuthenticationService } from "../services/authentication/authentication.service";
 import { User } from "../models/user";
 import { SocketService } from "../services/socket/socket.service";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: "app-root",
@@ -11,7 +13,7 @@ import { SocketService } from "../services/socket/socket.service";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  currentUser: User;
+  currentUser$: Observable<User>;
   navbarOpen = false;
 
   constructor(
@@ -19,12 +21,15 @@ export class AppComponent {
     private authenticationService: AuthenticationService,
     private socketService: SocketService
   ) {
-    this.authenticationService.currentUser.subscribe(currentUser => {
-      if (currentUser) {
-        this.currentUser = currentUser;
-        this.socketService.connect();
-      }
-    });
+    this.currentUser$ = this.authenticationService.currentUser.pipe(
+      map(user => {
+        if (user) {
+          socketService.connect();
+        }
+
+        return user;
+      })
+    );
   }
 
   toggleNavbar() {
