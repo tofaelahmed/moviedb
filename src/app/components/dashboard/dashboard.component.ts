@@ -34,10 +34,17 @@ export class DashboardComponent implements OnInit {
     {
       headerName: "Release Date",
       field: "releaseDate",
-      cellRenderer: getDateTemplate
+      cellRenderer: getDateTemplate,
+      cellClass: "cell-wrap-text",
+      autoHeight: true
     },
     { headerName: "Duration (minutes)", field: "duration" },
-    { headerName: "Director", field: "director" },
+    {
+      headerName: "Director",
+      field: "director",
+      cellClass: "cell-wrap-text",
+      autoHeight: true
+    },
     {
       headerName: "Actors",
       field: "actors",

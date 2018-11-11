@@ -27,6 +27,7 @@ export class AddEditMovieComponent implements OnInit {
   reviews = [];
   movieUpdates: Observable<Movie>;
   movieDeleted = false;
+  averageRating = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -90,13 +91,15 @@ export class AddEditMovieComponent implements OnInit {
       director,
       actors,
       reviews,
-      user
+      user,
+      avgRating
     } = data;
     const date = formatDate(releaseDate);
     const loggedInUserId = this.authenticationService.currentUserValue.id;
     const userReview = reviews.find(review => review.user === loggedInUserId);
     this.showDelete = loggedInUserId === user;
     this.reviews = reviews;
+    this.averageRating = avgRating;
     if (userReview) {
       this.userReview = userReview;
     }

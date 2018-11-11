@@ -6,7 +6,7 @@
           <h3 class="mb-0">Add Movie</h3>
         </div>
         <div *ngIf="f.id.value" class="card-header">
-          <h3 class="mb-0">Edit Movie</h3>
+          <h3 class="mb-0">{{ f.title.value }}</h3>
         </div>
 
         <div class="card-body">
@@ -124,6 +124,7 @@
       [userReview]="userReview"
       [reviews]="reviews"
       [movieId]="movieId"
+      [averageRating]="averageRating"
     ></app-review>
   </div>
 </div>

@@ -13,7 +13,7 @@ export class ReviewComponent implements OnInit {
   @Input() movieId;
   @Input() userReview;
   @Input() reviews;
-
+  @Input() averageRating;
   reviewForm: FormGroup;
   loading = false;
   submitted = false;

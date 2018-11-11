@@ -2,7 +2,12 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <a class="navbar-brand" href="#"> MovieDB </a>
 
-  <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+  <button
+    *ngIf="(currentUser$ | async)"
+    class="navbar-toggler"
+    type="button"
+    (click)="toggleNavbar()"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
 

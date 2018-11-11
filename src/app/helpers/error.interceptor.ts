@@ -31,7 +31,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError(err => {
         if (err.status === 401 || err.status === 403) {
           this.authenticationService.logout();
-          if (location.pathname !== "/login") location.reload(true);
+          if (!location.pathname.endsWith("/login")) location.reload(true);
         }
         const error =
           getErrorMessage(err.error) || err.error.message || err.statusText;

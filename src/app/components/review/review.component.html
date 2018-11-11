@@ -43,9 +43,25 @@
   </div>
 </div>
 
+<div *ngIf="userReview" class="alert alert-success" role="alert">
+  <div class="d-flex">
+    <em class="alert-heading">You reviewed this movie!</em>
+    <small class="ml-auto"> {{ userReview.date | date: "short" }}</small>
+  </div>
+  <ngb-rating
+    [(rate)]="userReview.rating"
+    max="5"
+    [readonly]="true"
+  ></ngb-rating>
+  <p>{{ userReview.comment }}</p>
+</div>
+
 <div *ngIf="reviews.length">
   <div class="card card-outline-secondary">
-    <div class="card-header"><h3 class="mb-0">User Reviews</h3></div>
+    <div class="card-header d-flex">
+      <h4 class="mb-0 mr-auto">Reviews</h4>
+      <h4 class="ml-auto">&#9733; {{ averageRating }}</h4>
+    </div>
     <div class="list-group">
       <a
         *ngFor="let review of reviews"
