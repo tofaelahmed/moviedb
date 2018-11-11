@@ -31,7 +31,7 @@ export class ReviewComponent implements OnInit {
     });
   }
 
-  get f() {
+  get formControls() {
     return this.reviewForm.controls;
   }
 

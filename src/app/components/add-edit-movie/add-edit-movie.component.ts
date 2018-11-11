@@ -113,7 +113,7 @@ export class AddEditMovieComponent implements OnInit {
       actors: actors.toString()
     });
   }
-  get f() {
+  get formControls() {
     return this.movieForm.controls;
   }
 

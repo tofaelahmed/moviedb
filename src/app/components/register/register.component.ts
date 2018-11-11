@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  get f() {
+  get formControls() {
     return this.registerForm.controls;
   }
 

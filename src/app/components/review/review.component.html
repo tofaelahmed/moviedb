@@ -9,8 +9,10 @@
             <ngb-rating
               max="5"
               formControlName="rating"
-              [formControl]="f.rating"
-              [ngClass]="{ 'is-invalid': submitted && f.rating.errors }"
+              [formControl]="formControls.rating"
+              [ngClass]="{
+                'is-invalid': submitted && formControls.rating.errors
+              }"
             ></ngb-rating>
           </div>
         </div>
@@ -21,13 +23,25 @@
             rows="5"
             formControlName="comment"
             class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.comment.errors }"
+            [ngClass]="{
+              'is-invalid': submitted && formControls.comment.errors
+            }"
           ></textarea>
-          <div *ngIf="submitted && f.rating.errors" class="invalid-feedback">
-            <div *ngIf="f.rating.errors.required">Rating is required</div>
+          <div
+            *ngIf="submitted && formControls.rating.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="formControls.rating.errors.required">
+              Rating is required
+            </div>
           </div>
-          <div *ngIf="submitted && f.comment.errors" class="invalid-feedback">
-            <div *ngIf="f.comment.errors.required">Comment is required</div>
+          <div
+            *ngIf="submitted && formControls.comment.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="formControls.comment.errors.required">
+              Comment is required
+            </div>
           </div>
         </div>
         <div class="form-group">

@@ -2,11 +2,11 @@
   <div class="col-lg-6 col-sm-12">
     <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
       <div class="card card-outline-secondary">
-        <div *ngIf="!f.id.value" class="card-header">
+        <div *ngIf="!formControls.id.value" class="card-header">
           <h3 class="mb-0">Add Movie</h3>
         </div>
-        <div *ngIf="f.id.value" class="card-header">
-          <h3 class="mb-0">{{ f.title.value }}</h3>
+        <div *ngIf="formControls.id.value" class="card-header">
+          <h3 class="mb-0">{{ formControls.title.value }}</h3>
         </div>
 
         <div class="card-body">
@@ -16,10 +16,17 @@
               type="text"
               formControlName="title"
               class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+              [ngClass]="{
+                'is-invalid': submitted && formControls.title.errors
+              }"
             />
-            <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
-              <div *ngIf="f.title.errors.required">Title is required</div>
+            <div
+              *ngIf="submitted && formControls.title.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formControls.title.errors.required">
+                Title is required
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -28,13 +35,15 @@
               type="date"
               formControlName="releaseDate"
               class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.releaseDate.errors }"
+              [ngClass]="{
+                'is-invalid': submitted && formControls.releaseDate.errors
+              }"
             />
             <div
-              *ngIf="submitted && f.releaseDate.errors"
+              *ngIf="submitted && formControls.releaseDate.errors"
               class="invalid-feedback"
             >
-              <div *ngIf="f.releaseDate.errors.required">
+              <div *ngIf="formControls.releaseDate.errors.required">
                 Release Date is required
               </div>
             </div>
@@ -45,13 +54,17 @@
               type="number"
               formControlName="duration"
               class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.duration.errors }"
+              [ngClass]="{
+                'is-invalid': submitted && formControls.duration.errors
+              }"
             />
             <div
-              *ngIf="submitted && f.duration.errors"
+              *ngIf="submitted && formControls.duration.errors"
               class="invalid-feedback"
             >
-              <div *ngIf="f.duration.errors.required">Duration is required</div>
+              <div *ngIf="formControls.duration.errors.required">
+                Duration is required
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -60,13 +73,17 @@
               type="text"
               formControlName="director"
               class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.director.errors }"
+              [ngClass]="{
+                'is-invalid': submitted && formControls.director.errors
+              }"
             />
             <div
-              *ngIf="submitted && f.director.errors"
+              *ngIf="submitted && formControls.director.errors"
               class="invalid-feedback"
             >
-              <div *ngIf="f.director.errors.required">Director is required</div>
+              <div *ngIf="formControls.director.errors.required">
+                Director is required
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -76,15 +93,22 @@
               formControlName="actors"
               placeholder="John Doe, Jane Doe"
               class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.actors.errors }"
+              [ngClass]="{
+                'is-invalid': submitted && formControls.actors.errors
+              }"
             />
-            <div *ngIf="submitted && f.actors.errors" class="invalid-feedback">
-              <div *ngIf="f.actors.errors.required">Actors is required</div>
+            <div
+              *ngIf="submitted && formControls.actors.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formControls.actors.errors.required">
+                Actors is required
+              </div>
             </div>
           </div>
           <div class="form-group">
             <button
-              *ngIf="!f.id.value"
+              *ngIf="!formControls.id.value"
               [disabled]="loading"
               class="btn btn-primary mr-2"
             >
@@ -93,14 +117,14 @@
             <button
               *ngIf="showDelete"
               [disabled]="loading || movieDeleted"
-              (click)="deleteMovie(f.id.value)"
+              (click)="deleteMovie(formControls.id.value)"
               class="btn btn-danger mr-2"
               type="button"
             >
               Delete Movie
             </button>
             <button
-              *ngIf="f.id.value"
+              *ngIf="formControls.id.value"
               [disabled]="loading"
               [disabled]="loading || movieDeleted"
               class="btn btn-primary mr-2"

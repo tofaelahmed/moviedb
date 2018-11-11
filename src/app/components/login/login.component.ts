@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       this.route.snapshot.queryParams["returnUrl"] || "/dashboard";
   }
 
-  get f() {
+  get formControls() {
     return this.loginForm.controls;
   }
 
@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
     this.authenticationService
-      .login(this.f.email.value, this.f.password.value)
+      .login(this.formControls.email.value, this.formControls.password.value)
       .pipe(first())
       .subscribe(
         data => {
