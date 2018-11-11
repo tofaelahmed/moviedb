@@ -10,7 +10,7 @@ import { Subscription, Observable } from "rxjs";
 import { GridOptions } from "ag-grid-community";
 import { CookieService } from "src/app/services/cookie/cookie.service";
 
-const getDateTemplae = params => formatDate(params.data.releaseDate);
+const getDateTemplate = params => formatDate(params.data.releaseDate);
 @Component({
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
@@ -34,11 +34,16 @@ export class DashboardComponent implements OnInit {
     {
       headerName: "Release Date",
       field: "releaseDate",
-      cellRenderer: getDateTemplae
+      cellRenderer: getDateTemplate
     },
-    { headerName: "Duration (in minutes)", field: "duration" },
+    { headerName: "Duration (minutes)", field: "duration" },
     { headerName: "Director", field: "director" },
-    { headerName: "Actors", field: "actors" },
+    {
+      headerName: "Actors",
+      field: "actors",
+      autoHeight: true,
+      cellClass: "cell-wrap-text"
+    },
     {
       headerName: "Average Rating (x/5)",
       field: "avgRating"
@@ -99,6 +104,7 @@ export class DashboardComponent implements OnInit {
       },
 
       onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
         params.api.resetRowHeights();
       },
       onSortChanged: params => {

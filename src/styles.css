@@ -11,3 +11,7 @@
 a {
   cursor: pointer;
 }
+
+.cell-wrap-text {
+  white-space: normal !important;
+}
