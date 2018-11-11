@@ -103,7 +103,6 @@ export class DashboardComponent implements OnInit {
 
           window.addEventListener("resize", function() {
             setTimeout(function() {
-              params.api.sizeColumnsToFit();
               params.api.resetRowHeights();
             });
           });
@@ -111,7 +110,6 @@ export class DashboardComponent implements OnInit {
       },
 
       onFirstDataRendered(params) {
-        params.api.sizeColumnsToFit();
         params.api.resetRowHeights();
       },
       onSortChanged: params => {
