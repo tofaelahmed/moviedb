@@ -14,7 +14,7 @@ const getErrorMessage = error => {
   if (error.data) {
     return error.data.message_en;
   } else if (error.errors) {
-    return error.errors[Object.keys(error.errors)[0]].message;
+    return error.errors[0].messages[0];
   } else {
     return null;
   }
