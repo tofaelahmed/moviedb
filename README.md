@@ -8,6 +8,15 @@ This is the Client application for MovieDB. It is a Single Page Application buil
 - [RxJS](https://angular.io/guide/rx-library)
 - [Bootstrap](https://getbootstrap.com/)
 
+## Features
+
+- Basic signup and login using token based authentication.
+- Add, edit, delete movies.
+- View movies added by all users.
+- Rate and comment on movies.
+- Realtime update to all authenticated users.
+- Full mobile responsive.
+ 
 ## Setup
 
 ```
